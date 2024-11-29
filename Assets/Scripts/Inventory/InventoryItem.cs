@@ -1,6 +1,16 @@
-﻿[System.Serializable]
-public struct InventoryItem
+﻿[System.Serializable] // 标记这个结构体为可序列化，使其可以被保存或传输
+public struct InventoryItem // 定义一个公共结构体
 {
-    public int itemCode;
-    public int itemQuantity;
+    public int itemCode; // 公开字段，存储物品的代码或标识符
+    public int itemQuantity; // 公开字段，存储物品的数量
 }
+
+/*InventoryItem 结构体：这个结构体用于表示库存中的一个物品，它包含两个公开字段：itemCode和itemQuantity。
+
+itemCode 字段：一个整数字段，用于存储物品的唯一代码或标识符。这可以是物品的数据库ID或其他唯一标识。
+
+itemQuantity 字段：一个整数字段，用于存储物品的数量，表示玩家或游戏世界中该物品的实例数。
+
+这个结构体通常用于游戏中的库存系统，允许开发者跟踪和管理系统中的物品。通过使用结构体，可以轻松地创建物品的实例，
+
+并在游戏的不同部分之间传递和操作这些实例。可序列化的特性使得这些数据可以被保存到磁盘或通过网络发送，这对于持久化游戏状态和多人游戏功能非常重要。*/

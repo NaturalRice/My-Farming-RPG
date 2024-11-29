@@ -1,10 +1,14 @@
-﻿using System;
+﻿// 引用System命名空间，提供基本的数据结构和操作
+using System;
+// 引用System.Collections.Generic命名空间，提供对集合类的支持
 using System.Collections.Generic;
+// 引用UnityEngine命名空间，提供Unity引擎相关功能的支持
 using UnityEngine;
 
+// 继承自SingletonMonobehaviour，确保TimeManager类在游戏场景中是唯一的，并实现ISaveable接口
 public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
 {
-
+    // 私有变量，用于存储游戏的年份、季节、日、小时、分钟和秒
     private int gameYear = 1;
     private Season gameSeason = Season.Spring;
     private int gameDay = 1;
@@ -13,16 +17,21 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
     private int gameSecond = 0;
     private string gameDayOfWeek = "Mon";
 
+    // 私有变量，用于标记游戏时钟是否暂停
     private bool gameClockPaused = false;
 
+    // 私有变量，用于存储游戏的时间刻度
     private float gameTick = 0f;
 
+    // 实现ISaveable接口的属性，用于存储唯一标识符
     private string _iSaveableUniqueID;
     public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
 
+    // 实现ISaveable接口的属性，用于存储游戏对象的保存数据
     private GameObjectSave _gameObjectSave;
     public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
 
+    // 在对象被创建时调用，用于初始化
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +40,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         GameObjectSave = new GameObjectSave();
     }
 
+    // 当此脚本启用时，注册保存和加载事件
     private void OnEnable()
     {
         ISaveableRegister();
@@ -39,6 +49,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         EventHandler.AfterSceneLoadEvent += AfterSceneLoadFadeIn;
     }
 
+    // 当此脚本禁用时，注销保存和加载事件
     private void OnDisable()
     {
         ISaveableDeregister();
@@ -47,22 +58,25 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         EventHandler.AfterSceneLoadEvent -= AfterSceneLoadFadeIn;
     }
 
+    // 在场景卸载前调用，暂停游戏时钟
     private void BeforeSceneUnloadFadeOut()
     {
         gameClockPaused = true;
     }
 
+    // 在场景加载后调用，恢复游戏时钟
     private void AfterSceneLoadFadeIn()
     {
         gameClockPaused = false;
     }
 
-
+    // 在游戏开始时调用，触发游戏分钟更新事件
     private void Start()
     {
         EventHandler.CallAdvanceGameMinuteEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
     }
 
+    // 每帧调用，更新游戏时间
     private void Update()
     {
         if (!gameClockPaused)
@@ -71,6 +85,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
+    // 更新游戏的时间刻度
     private void GameTick()
     {
         gameTick += Time.deltaTime;
@@ -83,6 +98,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
+    // 更新游戏的秒数
     private void UpdateGameSecond()
     {
         gameSecond++;
@@ -91,7 +107,6 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         {
             gameSecond = 0;
             gameMinute++;
-
 
             if (gameMinute > 59)
             {
@@ -140,9 +155,10 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
 
         }
 
-        // Call to advance game second event would go here if required
+        // 如果需要，在这里调用更新游戏秒数事件
     }
 
+    // 根据游戏的日和季节计算星期几
     private string GetDayOfWeek()
     {
         int totalDays = (((int)gameSeason) * 30) + gameDay;
@@ -176,6 +192,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
+    // 获取游戏的时间
     public TimeSpan GetGameTime()
     {
         TimeSpan gameTime = new TimeSpan(gameHour, gameMinute, gameSecond);
@@ -183,11 +200,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         return gameTime;
     }
 
-
-    //TODO:Remove
-    /// <summary>
-    /// Advance 1 game minute
-    /// </summary>
+    // 测试方法，前进1游戏分钟
     public void TestAdvanceGameMinute()
     {
         for (int i = 0; i < 60; i++)
@@ -196,10 +209,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
-    //TODO:Remove
-    /// <summary>
-    /// Advance 1 day
-    /// </summary>
+    // 测试方法，前进1天
     public void TestAdvanceGameDay()
     {
         for (int i = 0; i < 86400; i++)
@@ -208,61 +218,64 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
+    // 实现ISaveable接口的方法，注册保存对象
     public void ISaveableRegister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Add(this);
     }
 
+    // 实现ISaveable接口的方法，注销保存对象
     public void ISaveableDeregister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Remove(this);
     }
 
+    // 实现ISaveable接口的方法，保存游戏状态
     public GameObjectSave ISaveableSave()
     {
-        // Delete existing scene save if exists
+        // 如果存在，则删除现有的场景保存数据
         GameObjectSave.sceneData.Remove(Settings.PersistentScene);
 
-        // Create new scene save
+        // 创建新的场景保存数据
         SceneSave sceneSave = new SceneSave();
 
-        // Create new int dictionary
+        // 创建新的整型字典
         sceneSave.intDictionary = new Dictionary<string, int>();
 
-        // Create new string dictionary
+        // 创建新的字符串字典
         sceneSave.stringDictionary = new Dictionary<string, string>();
 
-        // Add values to the int dictionary
+        // 添加整型值到字典
         sceneSave.intDictionary.Add("gameYear", gameYear);
         sceneSave.intDictionary.Add("gameDay", gameDay);
         sceneSave.intDictionary.Add("gameHour", gameHour);
         sceneSave.intDictionary.Add("gameMinute", gameMinute);
         sceneSave.intDictionary.Add("gameSecond", gameSecond);
 
-        // Add values to the string dictionary
+        // 添加字符串值到字典
         sceneSave.stringDictionary.Add("gameDayOfWeek", gameDayOfWeek);
         sceneSave.stringDictionary.Add("gameSeason", gameSeason.ToString());
 
-        // Add scene save to game object for persistent scene
+        // 将场景保存数据添加到游戏对象的持久场景中
         GameObjectSave.sceneData.Add(Settings.PersistentScene, sceneSave);
 
         return GameObjectSave;
     }
-
+    // 实现ISaveable接口的方法，加载游戏状态
     public void ISaveableLoad(GameSave gameSave)
     {
-        // Get saved gameobject from gameSave data
+        // 从gameSave数据中获取保存的游戏对象
         if (gameSave.gameObjectData.TryGetValue(ISaveableUniqueID, out GameObjectSave gameObjectSave))
         {
             GameObjectSave = gameObjectSave;
 
-            // Get savedscene data for gameObject
+            // 获取游戏对象的保存场景数据
             if (GameObjectSave.sceneData.TryGetValue(Settings.PersistentScene, out SceneSave sceneSave))
             {
-                // if int and string dictionaries are found
+                // 如果找到整型和字符串字典
                 if (sceneSave.intDictionary != null && sceneSave.stringDictionary != null)
                 {
-                    // populate saved int values
+                    // 填充保存的整型值
                     if (sceneSave.intDictionary.TryGetValue("gameYear", out int savedGameYear))
                         gameYear = savedGameYear;
 
@@ -278,7 +291,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
                     if (sceneSave.intDictionary.TryGetValue("gameSecond", out int savedGameSecond))
                         gameSecond = savedGameSecond;
 
-                    // populate string saved values
+                    // 填充保存的字符串值
                     if (sceneSave.stringDictionary.TryGetValue("gameDayOfWeek", out string savedGameDayOfWeek))
                         gameDayOfWeek = savedGameDayOfWeek;
 
@@ -290,24 +303,63 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>, ISaveable
                         }
                     }
 
-                    // Zero gametick
+                    // 重置游戏时间刻度
                     gameTick = 0f;
 
-                    // Trigger advance minute event
+                    // 触发游戏分钟更新事件
                     EventHandler.CallAdvanceGameMinuteEvent(gameYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
 
-                    // Refresh game clock
+                    // 刷新游戏时钟
                 }
             }
         }
     }
     public void ISaveableStoreScene(string sceneName)
     {
-        // Nothing required here since Time Manager is running on the persistent scene
+        // 实现ISaveable接口的方法，存储场景数据（由于Time Manager在持久场景中运行，这里不需要做任何操作）
     }
 
     public void ISaveableRestoreScene(string sceneName)
     {
-        // Nothing required here since Time Manager is running on the persistent scene
+        // 实现ISaveable接口的方法，恢复场景数据（由于Time Manager在持久场景中运行，这里不需要做任何操作）
     }
 }
+
+/*
+1. `TimeManager`类继承自`SingletonMonobehaviour`，这是一个单例模式的实现，确保`TimeManager`在游戏场景中是唯一的实例。同时，它实现了`ISaveable`接口，用于保存和加载游戏时间状态。
+
+2. `gameYear`、`gameSeason`、`gameDay`、`gameHour`、`gameMinute`和`gameSecond`是私有变量，用于存储游戏的当前年、季节、日、小时、分钟和秒。
+
+3. `gameClockPaused`是私有变量，用于标记游戏时钟是否暂停。
+
+4. `gameTick`是私有变量，用于存储游戏的时间刻度，以秒为单位。
+
+5. `_iSaveableUniqueID`和`_gameObjectSave`是私有变量，分别用于存储`ISaveable`接口的唯一标识符和游戏对象的保存数据。
+
+6. `Awake`方法在游戏对象创建时调用，用于初始化唯一标识符和游戏对象的保存数据。
+
+7. `OnEnable`和`OnDisable`方法分别在脚本启用和禁用时调用，用于注册和注销事件。
+
+8. `BeforeSceneUnloadFadeOut`和`AfterSceneLoadFadeIn`方法分别在场景卸载前和加载后调用，用于暂停和恢复游戏时钟。
+
+9. `Start`方法在游戏开始时调用，触发游戏分钟更新事件。
+
+10. `Update`方法每帧调用，更新游戏时间。
+
+11. `GameTick`方法更新游戏的时间刻度。
+
+12. `UpdateGameSecond`方法更新游戏的秒数，并在必要时更新分钟、小时、日、季节和年。
+
+13. `GetDayOfWeek`方法根据游戏的日和季节计算星期几。
+
+14. `GetGameTime`方法获取游戏的时间。
+
+15. `TestAdvanceGameMinute`和`TestAdvanceGameDay`是测试方法，用于前进游戏时间。
+
+16. `ISaveableRegister`和`ISaveableDeregister`方法实现了`ISaveable`接口，用于注册和注销保存对象。
+
+17. `ISaveableSave`和`ISaveableLoad`方法实现了`ISaveable`接口，用于保存和加载游戏状态。
+
+18. `ISaveableStoreScene`和`ISaveableRestoreScene`方法实现了`ISaveable`接口，但由于`Time Manager`在持久场景中运行，这里不需要做任何操作。
+
+这个类的主要用途是管理游戏中的时间和日期，并提供保存和加载游戏时间状态的功能。通过响应事件和更新时间刻度，它可以确保游戏时间与游戏世界中的时间同步。*/

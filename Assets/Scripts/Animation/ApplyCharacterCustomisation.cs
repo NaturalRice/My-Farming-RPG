@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic; // 使用集合类
+using UnityEngine; // 使用Unity引擎的类
 
+// 可序列化的类，用于颜色交换
 [System.Serializable]
 public class colorSwap
 {
-    public Color fromColor;
-    public Color toColor;
+    public Color fromColor; // 要替换的原始颜色
+    public Color toColor; // 替换后的目标颜色
 
+    // 构造函数，初始化颜色交换对象
     public colorSwap(Color fromColor, Color toColor)
     {
         this.fromColor = fromColor;
@@ -14,137 +16,136 @@ public class colorSwap
     }
 }
 
-
-public class ApplyCharacterCustomisation : MonoBehaviour
+public class ApplyCharacterCustomisation : MonoBehaviour // 定义一个MonoBehaviour类
 {
-    // Input Textures
-    [Header("Base Textures")]
-    [SerializeField] private Texture2D maleFarmerBaseTexture = null;
-    [SerializeField] private Texture2D femaleFarmerBaseTexture = null;
-    [SerializeField] private Texture2D shirtsBaseTexture = null;
-    [SerializeField] private Texture2D hairBaseTexture = null;
-    [SerializeField] private Texture2D hatsBaseTexture = null;
-    [SerializeField] private Texture2D adornmentsBaseTexture = null;
-    private Texture2D farmerBaseTexture;
+    // 输入纹理
+    [Header("Base Textures")] // 标题注释
+    [SerializeField] private Texture2D maleFarmerBaseTexture = null; // 男性农民基础纹理
+    [SerializeField] private Texture2D femaleFarmerBaseTexture = null; // 女性农民基础纹理
+    [SerializeField] private Texture2D shirtsBaseTexture = null; // 衬衫基础纹理
+    [SerializeField] private Texture2D hairBaseTexture = null; // 头发基础纹理
+    [SerializeField] private Texture2D hatsBaseTexture = null; // 帽子基础纹理
+    [SerializeField] private Texture2D adornmentsBaseTexture = null; // 装饰基础纹理
+    private Texture2D farmerBaseTexture; // 农民基础纹理
 
-    // Created Textures
-    [Header("OutputBase Texture To Be Used For Animation")]
-    [SerializeField] private Texture2D farmerBaseCustomised = null;
-    [SerializeField] private Texture2D hairCustomised = null;
-    [SerializeField] private Texture2D hatsCustomised = null;
-    private Texture2D farmerBaseShirtsUpdated;
-    private Texture2D farmerBaseAdornmentsUpdated;
-    private Texture2D selectedShirt;
-    private Texture2D selectedAdornment;
+    // 创建的纹理
+    [Header("OutputBase Texture To Be Used For Animation")] // 标题注释
+    [SerializeField] private Texture2D farmerBaseCustomised = null; // 自定义的农民基础纹理
+    [SerializeField] private Texture2D hairCustomised = null; // 自定义的头发纹理
+    [SerializeField] private Texture2D hatsCustomised = null; // 自定义的帽子纹理
+    private Texture2D farmerBaseShirtsUpdated; // 更新的农民衬衫纹理
+    private Texture2D farmerBaseAdornmentsUpdated; // 更新的农民装饰纹理
+    private Texture2D selectedShirt; // 选择的衬衫
+    private Texture2D selectedAdornment; // 选择的装饰
 
-    // Select Shirt Style
-    [Header("Select Shirt Style")]
-    [Range(0, 1)]
-    [SerializeField] private int inputShirtStyleNo = 0;
+    // 选择衬衫样式
+    [Header("Select Shirt Style")] // 标题注释
+    [Range(0, 1)] // 范围限制
+    [SerializeField] private int inputShirtStyleNo = 0; // 输入的衬衫样式编号
 
-    // Select Hair Style
-    [Header("Select Hair Style")]
-    [Range(0, 2)]
-    [SerializeField] private int inputHairStyleNo = 0;
+    // 选择发型
+    [Header("Select Hair Style")] // 标题注释
+    [Range(0, 2)] // 范围限制
+    [SerializeField] private int inputHairStyleNo = 0; // 输入的发型编号
 
-    // Select Hat Style
-    [Header("Select Hat Style")]
-    [Range(0, 1)]
-    [SerializeField] private int inputHatStyleNo = 0;
+    // 选择帽子样式
+    [Header("Select Hat Style")] // 标题注释
+    [Range(0, 1)] // 范围限制
+    [SerializeField] private int inputHatStyleNo = 0; // 输入的帽子样式编号
 
-    // Select Adornments Style
-    [Header("Select Adornments Style")]
-    [Range(0, 2)]
-    [SerializeField] private int inputAdornmentsStyleNo = 0;
+    // 选择装饰样式
+    [Header("Select Adornments Style")] // 标题注释
+    [Range(0, 2)] // 范围限制
+    [SerializeField] private int inputAdornmentsStyleNo = 0; // 输入的装饰样式编号
 
-    // Select Skin Type
-    [Header("Select Skin Type")]
-    [Range(0, 3)]
-    [SerializeField] private int inputSkinType = 0;
+    // 选择皮肤类型
+    [Header("Select Skin Type")] // 标题注释
+    [Range(0, 3)] // 范围限制
+    [SerializeField] private int inputSkinType = 0; // 输入的皮肤类型编号
 
-    // Select Sex
-    [Header("Select Sex: 0=Male, 1=Female")]
-    [Range(0, 1)]
-    [SerializeField] private int inputSex = 0;
+    // 选择性别
+    [Header("Select Sex: 0=Male, 1=Female")] // 标题注释
+    [Range(0, 1)] // 范围限制
+    [SerializeField] private int inputSex = 0; // 输入的性别编号
 
-    // Select Hair Color
-    [SerializeField] private Color inputHairColor = Color.black;
+    // 选择头发颜色
+    [SerializeField] private Color inputHairColor = Color.black; // 输入的头发颜色
 
-    // Select Trouser Color
-    [SerializeField] private Color inputTrouserColor = Color.blue;
-
-
-    private Facing[,] bodyFacingArray;
-    private Vector2Int[,] bodyShirtOffsetArray;
-    private Vector2Int[,] bodyAdornmentsOffsetArray;
-
-    // Dimensions
-    private int bodyRows = 21;
-    private int bodyColumns = 6;
-    private int farmerSpriteWidth = 16;
-    private int farmerSpriteHeight = 32;
-    private int shirtTextureWidth = 9;
-    private int shirtTextureHeight = 36;
-    private int shirtSpriteWidth = 9;
-    private int shirtSpriteHeight = 9;
-    private int shirtStylesInSpriteWidth = 16;
-
-    private int hairTextureWidth = 16;
-    private int hairTextureHeight = 96;
-    private int hairStylesInSpriteWidth = 8;
-
-    private int hatTextureWidth = 20;
-    private int hatTextureHeight = 80;
-    private int hatStylesInSpriteWidth = 12;
-
-    private int adornmentsTextureWidth = 16;
-    private int adornmentsTextureHeight = 32;
-    private int adornmentsStylesInSpriteWidth = 8;
-    private int adornmentsSpriteWidth = 16;
-    private int adornmentsSpriteHeight = 16;
-
-    private List<colorSwap> colorSwapList;
-
-    // Target arm colours for color replacement
-    private Color32 armTargetColor1 = new Color32(77, 13, 13, 255);  // darkest
-    private Color32 armTargetColor2 = new Color32(138, 41, 41, 255); // next darkest
-    private Color32 armTargetColor3 = new Color32(172, 50, 50, 255); // lightest
-
-    // Target skin colours for color replacement
-    private Color32 skinTargetColor1 = new Color32(145, 117, 90, 255);  // darkest
-    private Color32 skinTargetColor2 = new Color32(204, 155, 108, 255);  // next darkest
-    private Color32 skinTargetColor3 = new Color32(207, 166, 128, 255);  // next darkest
-    private Color32 skinTargetColor4 = new Color32(238, 195, 154, 255);  // lightest
+    // 选择裤子颜色
+    [SerializeField] private Color inputTrouserColor = Color.blue; // 输入的裤子颜色
 
 
-    private void Awake()
+    private Facing[,] bodyFacingArray; // 身体朝向数组
+    private Vector2Int[,] bodyShirtOffsetArray; // 身体衬衫偏移数组
+    private Vector2Int[,] bodyAdornmentsOffsetArray; // 身体装饰偏移数组
+
+    // 尺寸
+    private int bodyRows = 21; // 身体行数
+    private int bodyColumns = 6; // 身体列数
+    private int farmerSpriteWidth = 16; // 农民精灵宽度
+    private int farmerSpriteHeight = 32; // 农民精灵高度
+    private int shirtTextureWidth = 9; // 衬衫纹理宽度
+    private int shirtTextureHeight = 36; // 衬衫纹理高度
+    private int shirtSpriteWidth = 9; // 衬衫精灵宽度
+    private int shirtSpriteHeight = 9; // 衬衫精灵高度
+    private int shirtStylesInSpriteWidth = 16; // 精灵宽度中的衬衫样式数
+
+    private int hairTextureWidth = 16; // 头发纹理宽度
+    private int hairTextureHeight = 96; // 头发纹理高度
+    private int hairStylesInSpriteWidth = 8; // 精灵宽度中的头发样式数
+
+    private int hatTextureWidth = 20; // 帽子纹理宽度
+    private int hatTextureHeight = 80; // 帽子纹理高度
+    private int hatStylesInSpriteWidth = 12; // 精灵宽度中的帽子样式数
+
+    private int adornmentsTextureWidth = 16; // 装饰纹理宽度
+    private int adornmentsTextureHeight = 32; // 装饰纹理高度
+    private int adornmentsStylesInSpriteWidth = 8; // 精灵宽度中的装饰样式数
+    private int adornmentsSpriteWidth = 16; // 装饰精灵宽度
+    private int adornmentsSpriteHeight = 16; // 装饰精灵高度
+
+    private List<colorSwap> colorSwapList; // 颜色交换列表
+
+    // 目标手臂颜色用于颜色替换
+    private Color32 armTargetColor1 = new Color32(77, 13, 13, 255); // 最暗
+    private Color32 armTargetColor2 = new Color32(138, 41, 41, 255); // 次暗
+    private Color32 armTargetColor3 = new Color32(172, 50, 50, 255); // 最亮
+
+    // 目标皮肤颜色用于颜色替换
+    private Color32 skinTargetColor1 = new Color32(145, 117, 90, 255); // 最暗
+    private Color32 skinTargetColor2 = new Color32(204, 155, 108, 255); // 次暗
+    private Color32 skinTargetColor3 = new Color32(207, 166, 128, 255); // 次暗
+    private Color32 skinTargetColor4 = new Color32(238, 195, 154, 255); // 最亮
+
+
+    private void Awake() // 在对象被加载时调用
     {
-        // Initialise color swap list
+        // 初始化颜色交换列表
         colorSwapList = new List<colorSwap>();
 
-        // Process Customisation
+        // 处理自定义
         ProcessCustomisation();
     }
 
-    private void ProcessCustomisation()
+    private void ProcessCustomisation() // 处理自定义
     {
-        ProcessGender();
+        ProcessGender(); // 处理性别
 
-        ProcessShirt();
+        ProcessShirt(); // 处理衬衫
 
-        ProcessArms();
+        ProcessArms(); // 处理手臂
 
-        ProcessTrousers();
+        ProcessTrousers(); // 处理裤子
 
-        ProcessHair();
+        ProcessHair(); // 处理头发
 
-        ProcessSkin();
+        ProcessSkin(); // 处理皮肤
 
-        ProcessHat();
+        ProcessHat(); // 处理帽子
 
-        ProcessAdornments();
+        ProcessAdornments(); // 处理装饰
 
-        MergeCustomisations();
+        MergeCustomisations(); // 合并自定义
     }
 
     private void ProcessGender()
@@ -1075,3 +1076,25 @@ public class ApplyCharacterCustomisation : MonoBehaviour
         bodyShirtOffsetArray[5, 20] = new Vector2Int(4, 9);
     }
 }
+
+/*colorSwap 类：一个用于存储颜色替换信息的可序列化类，包含原始颜色和目标颜色。
+
+ApplyCharacterCustomisation 类：一个继承自MonoBehaviour的类，用于处理角色的自定义。
+
+输入纹理：定义了一系列基础纹理，包括男性和女性农民的基础纹理、衬衫、头发、帽子和装饰。
+
+创建的纹理：定义了一系列自定义纹理，用于存储经过处理后的纹理。
+
+选择样式和颜色：定义了一系列用于选择不同样式和颜色的变量，如衬衫样式、发型、帽子样式、装饰样式、皮肤类型、性别、头发颜色和裤子颜色。
+
+尺寸：定义了一系列与纹理和精灵相关的尺寸变量。
+
+颜色交换列表：定义了一个颜色交换列表，用于存储颜色替换信息。
+
+目标颜色：定义了一系列目标颜色，用于颜色替换。
+
+Awake 方法：在对象被加载时初始化颜色交换列表并处理自定义。
+
+ProcessCustomisation 方法：调用一系列方法来处理角色的自定义，包括性别、衬衫、手臂、裤子、头发、皮肤、帽子和装饰。
+
+其他方法：代码中还包含了一系列方法，如ProcessGender、ProcessShirt、ProcessArms等，用于处理角色的不同部分的自定义。这些方法通常涉及获取纹理像素、应用颜色替换、合并纹理等操作。*/
