@@ -62,6 +62,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f0d720006ae6c9e468cc99a9f1713ba1, type: 3}
   - {fileID: 21300000, guid: 25925800440b0e84f9533a314ddca6b5, type: 3}
   - {fileID: 21300000, guid: 7da78110e28e0f74aaa3ef4a41f4c0ed, type: 3}
+  - {fileID: 21300000, guid: 6dd1fb600560fb04bb54f0481bbf984b, type: 3}
+  - {fileID: 21300000, guid: 68afb731cda917846981124ebf23241f, type: 3}
+  - {fileID: 21300000, guid: f064af81b33fe4141b789e5ccebba37c, type: 3}
   - {fileID: 21300000, guid: 207ad99171e171b418bcaaa396d5a6f6, type: 3}
   - {fileID: 21300000, guid: aa1fcd9144ccf574985824378256b95c, type: 3}
   - {fileID: 21300000, guid: 8298ab725cafa93429a58bd3e8273289, type: 3}
@@ -96,6 +99,7 @@ SpriteAtlas:
   - {fileID: 4005202913230342895, guid: 2d0dfd935517f7049a9ec156af517511, type: 3}
   - {fileID: 5613540868099651934, guid: 2d0dfd935517f7049a9ec156af517511, type: 3}
   - {fileID: -2514537956183521370, guid: 2d0dfd935517f7049a9ec156af517511, type: 3}
+  - {fileID: 21300000, guid: 7e338a0440e453d4aa85d02823927bfc, type: 3}
   - {fileID: -6853649311568494795, guid: fec47794c20ce834da941a7b4e8caa07, type: 3}
   - {fileID: 1549225131909812281, guid: fec47794c20ce834da941a7b4e8caa07, type: 3}
   - {fileID: -2634811762275802146, guid: fec47794c20ce834da941a7b4e8caa07, type: 3}
@@ -203,6 +207,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 37e09848a493a0a4b89a743f73f75963, type: 3}
   - {fileID: 21300000, guid: 4fb548784c08c2c40b86a99493efa98d, type: 3}
   - {fileID: 21300000, guid: c31ef2d8735edaa4c898f9e490b6d95e, type: 3}
+  - {fileID: 21300000, guid: 79d770895881bc3408829de13b494a1d, type: 3}
   - {fileID: 6887888638497536022, guid: afeab3b9fd0c19442af661a1d1f72d1b, type: 3}
   - {fileID: 7549046521571793231, guid: afeab3b9fd0c19442af661a1d1f72d1b, type: 3}
   - {fileID: -66721832405222472, guid: afeab3b9fd0c19442af661a1d1f72d1b, type: 3}
@@ -810,6 +815,7 @@ SpriteAtlas:
   - {fileID: -2485526237100873097, guid: 0f48021b42b3b4342b1829669a8ec65d, type: 3}
   - {fileID: -8079878080289612398, guid: 0f48021b42b3b4342b1829669a8ec65d, type: 3}
   - {fileID: 21300000, guid: 622c962bd2dcb0d42abf3a4696d0bee9, type: 3}
+  - {fileID: 21300000, guid: d5d9dc8b2b6808b4ab89192f166bad27, type: 3}
   - {fileID: -2591857847239701004, guid: 3178799b764c8f14f821ba06edc51375, type: 3}
   - {fileID: 719774538432170253, guid: 3178799b764c8f14f821ba06edc51375, type: 3}
   - {fileID: 5304089592871775321, guid: 3178799b764c8f14f821ba06edc51375, type: 3}
@@ -819,6 +825,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 90499fac1706de44382ab07f7887e79e, type: 3}
   - {fileID: 21300000, guid: b2eff0cde9f776947b747c1a4cc96406, type: 3}
   - {fileID: 21300000, guid: d1488fdd7509cda4f9b89da8bb3c5a68, type: 3}
+  - {fileID: 21300000, guid: d623583ec81a3934a97b5f5bd66b9cb3, type: 3}
   - {fileID: 21300000, guid: ffd3a07e9702a614284d1e5a4be9f532, type: 3}
   - {fileID: 1814301352343478109, guid: afba78ae84664a941a55c31758ab5cf9, type: 3}
   - {fileID: -7429651265933631045, guid: afba78ae84664a941a55c31758ab5cf9, type: 3}
@@ -849,7 +856,11 @@ SpriteAtlas:
   - {fileID: 8275156808502821822, guid: afba78ae84664a941a55c31758ab5cf9, type: 3}
   - {fileID: -7746961489531447020, guid: afba78ae84664a941a55c31758ab5cf9, type: 3}
   - {fileID: -5900568562052052237, guid: afba78ae84664a941a55c31758ab5cf9, type: 3}
+  - {fileID: 21300000, guid: 9d0f52ee183c7b847a61affcbc71bc5f, type: 3}
+  - {fileID: 21300000, guid: bb82abee223b1c14f8c2557499415da9, type: 3}
+  - {fileID: 21300000, guid: 6574001f3ac39754695179c840688491, type: 3}
   - {fileID: 21300000, guid: 6cefe32f730a75046ab8e8e5434d336e, type: 3}
+  - {fileID: 21300000, guid: 2541a13f813066345b96a2aff0f48c97, type: 3}
   - {fileID: -8889897509666649805, guid: 400e208f8ff6631429ef6ca968c16ad2, type: 3}
   - {fileID: 6224320500644084454, guid: 400e208f8ff6631429ef6ca968c16ad2, type: 3}
   - {fileID: 8544150700639678146, guid: 400e208f8ff6631429ef6ca968c16ad2, type: 3}
@@ -896,6 +907,9 @@ SpriteAtlas:
   - Pumpkin
   - Weed1
   - ParsnipSeeds
+  - "GroundTileset-\u539F\u4EF6"
+  - "InventoryBar-\u539F\u4EF6"
+  - "Clock-\u539F\u4EF6"
   - Grass1
   - Clock
   - TumbleweedThistle
@@ -930,6 +944,7 @@ SpriteAtlas:
   - Butch_Portrait_0
   - Butch_Portrait_1
   - Butch_Portrait_2
+  - Pillar
   - effects_8
   - effects_9
   - effects_6
@@ -1037,6 +1052,7 @@ SpriteAtlas:
   - Cactus1
   - Stone1Seed
   - HalfCollisionTile
+  - Collision Tile Diagonal 2
   - IndoorsTileset_15
   - IndoorsTileset_6
   - IndoorsTileset_14
@@ -1644,6 +1660,7 @@ SpriteAtlas:
   - GroundTileset_108
   - GroundTileset_212
   - DialogueBox
+  - Collision Tile Diagonal 5
   - Cora_Portrait_1
   - Cora_Portrait_0
   - Cora_Portrait_2
@@ -1653,6 +1670,7 @@ SpriteAtlas:
   - Collision Tile Diagonal
   - InventoryHighlight
   - PauseScreenSelectedTab
+  - Collision Tile Diagonal 1
   - Stone2Seed
   - Butch_14
   - Butch_19
@@ -1683,7 +1701,11 @@ SpriteAtlas:
   - Butch_17
   - Butch_16
   - Butch_15
+  - Collision Tile Diagonal 4
+  - Collision Tile Diagonal 6
+  - Collision Tile Diagonal 3
   - WildOakScenary
+  - "IndoorsTileset-\u539F\u4EF6"
   - Cora_8
   - Cora_7
   - Cora_6
