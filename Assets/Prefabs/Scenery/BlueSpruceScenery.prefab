@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8171650590219994900}
   - component: {fileID: 6188604083486769499}
   - component: {fileID: 2481584440626277996}
-  - component: {fileID: 1610602482634953365}
+  - component: {fileID: -1143729345343210975}
   m_Layer: 0
-  m_Name: BlueSpruceScenary
+  m_Name: BlueSpruceScenery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -111,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 6}
   m_EdgeRadius: 0
---- !u!114 &1610602482634953365
+--- !u!114 &-1143729345343210975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,6 +171,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -68,6 +68,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 207ad99171e171b418bcaaa396d5a6f6, type: 3}
   - {fileID: 21300000, guid: aa1fcd9144ccf574985824378256b95c, type: 3}
   - {fileID: 21300000, guid: 8298ab725cafa93429a58bd3e8273289, type: 3}
+  - {fileID: 21300000, guid: 6eb211e24e7839e469b05faf7cb199ca, type: 3}
   - {fileID: 21300000, guid: 081b5033ea188cb48b5d44b99ab920bc, type: 3}
   - {fileID: 21300000, guid: 0e9e72533af4a924cb98248a27955a25, type: 3}
   - {fileID: 21300504, guid: 853ac38383c680342ac7e688bf29b197, type: 3}
@@ -203,6 +204,7 @@ SpriteAtlas:
   - {fileID: 6019493940114240039, guid: d241c496741a12d4290e12ba81dd6724, type: 3}
   - {fileID: 4789355601316357596, guid: d241c496741a12d4290e12ba81dd6724, type: 3}
   - {fileID: 21300000, guid: e26dc0d638731ec47abe9c4b3cae62ac, type: 3}
+  - {fileID: 21300000, guid: ecaa6f572c76abb4aae587a60a48d98d, type: 3}
   - {fileID: 21300000, guid: 2e92a61802edadc4495e4d901e3a97cb, type: 3}
   - {fileID: 21300000, guid: 37e09848a493a0a4b89a743f73f75963, type: 3}
   - {fileID: 21300000, guid: 4fb548784c08c2c40b86a99493efa98d, type: 3}
@@ -256,6 +258,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5b29a1ba3552b5b4b824c583e87783fd, type: 3}
   - {fileID: 21300000, guid: 46b161dabd24e6c43aa181b2d99642e7, type: 3}
   - {fileID: 21300000, guid: 45368eea2740e5040ad33bd39d932887, type: 3}
+  - {fileID: 21300000, guid: 942ae60bd22fdbd4b9e4862674b29f46, type: 3}
   - {fileID: -898201131174279650, guid: 0f48021b42b3b4342b1829669a8ec65d, type: 3}
   - {fileID: -2994149180507011244, guid: 0f48021b42b3b4342b1829669a8ec65d, type: 3}
   - {fileID: 2637295075639128948, guid: 0f48021b42b3b4342b1829669a8ec65d, type: 3}
@@ -820,9 +823,13 @@ SpriteAtlas:
   - {fileID: 719774538432170253, guid: 3178799b764c8f14f821ba06edc51375, type: 3}
   - {fileID: 5304089592871775321, guid: 3178799b764c8f14f821ba06edc51375, type: 3}
   - {fileID: 21300000, guid: 898d91cb190da4b479714f63ae8519e0, type: 3}
+  - {fileID: 21300000, guid: 4b3e9bfb0b1f174449359fe977896fcf, type: 3}
+  - {fileID: 21300000, guid: 5e3f442c6a65f374dbef8094cbc23e9a, type: 3}
   - {fileID: 21300000, guid: 730e572c78cf0244ca0db36bb8f3af7f, type: 3}
   - {fileID: 21300000, guid: 2a61f48c8f2dfed4da6f2f8e2485ee15, type: 3}
   - {fileID: 21300000, guid: 90499fac1706de44382ab07f7887e79e, type: 3}
+  - {fileID: 21300000, guid: 285d6bdc5754639499de9547e14c4283, type: 3}
+  - {fileID: 21300000, guid: 704782eca97c1e8449619e6b65cc3d75, type: 3}
   - {fileID: 21300000, guid: b2eff0cde9f776947b747c1a4cc96406, type: 3}
   - {fileID: 21300000, guid: d1488fdd7509cda4f9b89da8bb3c5a68, type: 3}
   - {fileID: 21300000, guid: d623583ec81a3934a97b5f5bd66b9cb3, type: 3}
@@ -913,6 +920,7 @@ SpriteAtlas:
   - Grass1
   - Clock
   - TumbleweedThistle
+  - DoorLeft
   - Sweetcorn
   - PauseScreen9Sprite
   - tools_252
@@ -1048,6 +1056,7 @@ SpriteAtlas:
   - CanyonOak_1
   - CanyonOak_0
   - Wood
+  - Pillar0
   - GreenGridCursor
   - Cactus1
   - Stone1Seed
@@ -1101,6 +1110,7 @@ SpriteAtlas:
   - InventoryPlayer
   - PauseScreenNotSelectedTab
   - textBox
+  - WallLeft
   - GroundTileset_0
   - GroundTileset_195
   - GroundTileset_109
@@ -1665,9 +1675,13 @@ SpriteAtlas:
   - Cora_Portrait_0
   - Cora_Portrait_2
   - GreenCursor
+  - Handrail
+  - DisplayCabinet
   - Acorn
   - Chair
   - Collision Tile Diagonal
+  - DoorRight
+  - WallRight
   - InventoryHighlight
   - PauseScreenSelectedTab
   - Collision Tile Diagonal 1
