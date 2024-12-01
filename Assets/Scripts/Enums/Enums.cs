@@ -87,7 +87,7 @@ public enum SoundName
 public enum ItemType
 {
     // 物品类型枚举，包含种子（Seed）、商品（Commodity）、水壶（Watering_tool）、锄头（Hoeing_tool）、砍伐工具（Chopping_tool）、破拆工具（Breaking_tool）、收割工具（Reaping_tool）、收集工具（Collecting_tool）、可收割的景观（Reapable_scenary）和家具（Furniture）
-    Seed, Commodity, Watering_tool, Hoeing_tool, Chopping_tool, Breaking_tool, Reaping_tool, Collecting_tool, Reapable_scenary, Furniture, none, count
+    Seed, Commodity, Watering_tool, Hoeing_tool, Chopping_tool, Breaking_tool, Reaping_tool, Collecting_tool, Reapable_scenary, Furniture, none, count, Fragments
 }
 
 public enum Facing

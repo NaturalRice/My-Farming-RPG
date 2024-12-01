@@ -309,3 +309,15 @@ MonoBehaviour:
     canBeDropped: 0
     canBeEaten: 0
     canBeCarried: 0
+  - itemCode: 10024
+    itemType: 12
+    itemDescription: "\u6587\u7269\u788E\u7247\u793A\u4F8B0"
+    itemSprite: {fileID: 21300000, guid: 55d7486aa0137654b88d98ce77a237f9, type: 3}
+    itemLongDescription: "\u53EA\u662F\u4E00\u4E2A\u7B80\u5355\u7684\u793A\u4F8B0"
+    itemUseGridRadius: 0
+    itemUseRadius: 0
+    isStartingItem: 0
+    canBePickedUp: 1
+    canBeDropped: 1
+    canBeEaten: 0
+    canBeCarried: 1
